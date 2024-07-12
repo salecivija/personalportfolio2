@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Russo+One&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        header, footer {
+            width: 100%;
+            height: 50px;
+            background-color: gray;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: absolute;
+            z-index: 2;
+        }
+        header {
+            top: 0;
+            border-bottom: 1px solid black;
+        }
+        footer {
+            bottom: 0;
+            border-top: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .alex-brush-regular {
+            font-family: "Alex Brush", cursive;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 2em;
+        }
+        .russo-one-regular {
+            font-family: "Russo One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            height: calc(100% - 100px);
+            position: absolute;
+            top: 50px;
+            transition: width 0.5s;
+        }
+        .left, .right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: flex 0.5s;
+            cursor: pointer;
+        }
+        .left {
+            background-image: url('image1.webp'); /* Updated with the correct path to the first image */
+        }
+        .right {
+            background-image: url('image2.webp'); /* Updated with the correct path to the second image */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.45);
+            transition: background-color 0.5s;
+        }
+        .left:hover .overlay, .right:hover .overlay {
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .left:hover {
+            flex: 7;
+        }
+        .right:hover {
+            flex: 7;
+        }
+        .left h1, .right h1 {
+            font-size: 2em;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            z-index: 1;
+            font-family: "Russo One", sans-serif;
+            border: 1px solid black;
+            padding: 10px;
+        }
+        .code-snippet {
+            position: absolute;
+            font-size: 12px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2px 5px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .line {
+            position: absolute;
+            width: 2px;
+            background-color: white;
+            opacity: 0.7;
+        }
+        .left-footer, .right-footer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .popup-content h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .popup-content .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        .popup-content .social-links .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .popup-content .social-links .column a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: black;
+            text-decoration: none;
+        }
+        .popup-content .social-links .column a img {
+            width: 20px;
+            height: 20px;
+        }
+        .popup.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <header class="alex-brush-regular">Welcome to My Portfolio</header>
+    <footer>
+        <div class="left-footer">
+            <div id="utc-time">UTC+1 Time: </div>
+            <div id="munich-weather">Munich Weather: </div>
+        </div>
+        <div class="footer-content">
+            <div id="footer-text" class="alex-brush-regular"></div>
+        </div>
+        <div class="right-footer">
+            <div id="visitor-ip">IP: </div>
+            <div id="visitor-location">Location: </div>
+            <div id="visitor-weather">Weather: </div>
+        </div>
+    </footer>
+
+    <div class="container">
+        <div class="left" onclick="showPopup('left')">
+            <h1>FOR THE RECORD</h1>
+            <div class="overlay"></div>
+        </div>
+        <div class="right" onclick="showPopup('right')">
+            <h1>MY RESEARCHES AND PUBLISHING PAPERS</h1>
+            <div class="overlay"></div>
+        </div>
+    </div>
+
+    <div id="popup-left" class="popup">
+        <div class="popup-content">
+            <h2>Social Links</h2>
+            <div class="social-links">
+                <div class="column">
+                    <a href="#"><img src="facebook-icon.png" alt="Facebook">Facebook</a>
+                    <a href="#"><img src="linkedin-icon.png" alt="LinkedIn">LinkedIn</a>
+                </div>
+                <div class="column">
+                    <a href="#"><img src="instagram-icon.png" alt="Instagram">Instagram</a>
+                    <a href="#"><img src="github-icon.png" alt="GitHub">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup-right" class="popup">
+        <div class="popup-content">
+            <h2>Social Links</h2>
+            <div class="social-links">
+                <div class="column">
+                    <a href="#"><img src="facebook-icon.png" alt="Facebook">Facebook</a>
+                    <a href="#"><img src="linkedin-icon.png" alt="LinkedIn">LinkedIn</a>
+                </div>
+                <div class="column">
+                    <a href="#"><img src="instagram-icon.png" alt="Instagram">Instagram</a>
+                    <a href="#"><img src="github-icon.png" alt="GitHub">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+
+        const snippets = [
+            "const aiModel = new AIModel();",
+            "def train_model(data):",
+            "fetch('/api/data')",
+            "const result = await axios.get('/api/data');",
+            "function renderChart(data) {",
+            "class NeuralNetwork:",
+            "const express = require('express');",
+            "const app = express();",
+            "router.post('/submit', async (req, res) => {",
+            "useEffect(() => {",
+            "const { data } = await fetchData();",
+            "if (error) throw new Error('Error fetching data');",
+            "return <div>{data}</div>;",
+            "app.listen(3000, () => {",
+            "const connection = mysql.createConnection();",
+            "mongoose.connect(uri, { useNewUrlParser: true });",
+            "render(<App />, document.getElementById('root'));",
+            "const graphQLSchema = buildSchema(`",
+            "const mutation = `mutation {",
+            "const query = `query {",
+            "const token = jwt.sign({ id: user.id }, secret);",
+            "const user = await User.findById(id);"
+        ];
+
+        const atomCount = 40; // Increased number of snippets
+        const atoms = [];
+        const lines = [];
+
+        function createSnippet(x, y) {
+            const snippet = document.createElement('div');
+            snippet.classList.add('code-snippet');
+            snippet.style.left = `${x}px`;
+            snippet.style.top = `${y}px`;
+            snippet.textContent = snippets[Math.floor(Math.random() * snippets.length)];
+            container.appendChild(snippet);
+            return snippet;
+        }
+
+        function createLine(x1, y1, x2, y2) {
+            const line = document.createElement('div');
+            line.classList.add('line');
+            const length = Math.hypot(x2 - x1, y2 - y1);
+            line.style.width = `${length}px`;
+            line.style.left = `${x1}px`;
+            line.style.top = `${y1}px`;
+            const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+            line.style.transform = `rotate(${angle}deg)`;
+            container.appendChild(line);
+            return line;
+        }
+
+        for (let i = 0; i < atomCount; i++) {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const snippet = createSnippet(x, y);
+            atoms.push({ element: snippet, x, y, dx: Math.random() * 2 - 1, dy: Math.random() * 2 - 1 });
+        }
+
+        function updateLines() {
+            lines.forEach(line => line.element.remove());
+            lines.length = 0;
+
+            for (let i = 0; i < atoms.length; i++) {
+                for (let j = i + 1; j < atoms.length; j++) {
+                    const dist = Math.hypot(atoms[i].x - atoms[j].x, atoms[i].y - atoms[j].y);
+                    if (dist < 200) {
+                        const line = createLine(atoms[i].x, atoms[i].y, atoms[j].x, atoms[j].y);
+                        lines.push({ element: line, atom1: atoms[i], atom2: atoms[j] });
+                    }
+                }
+            }
+        }
+
+        function moveAtoms() {
+            atoms.forEach(atom => {
+                atom.x += atom.dx;
+                atom.y += atom.dy;
+
+                if (atom.x < 0 || atom.x > window.innerWidth) atom.dx *= -1;
+                if (atom.y < 0 || atom.y > window.innerHeight) atom.dy *= -1;
+
+                atom.element.style.left = `${atom.x}px`;
+                atom.element.style.top = `${atom.y}px`;
+            });
+
+            updateLines();
+        }
+
+        function avoidCursor(e) {
+            const cursorX = e.clientX;
+            const cursorY = e.clientY;
+
+            atoms.forEach(atom => {
+                const dist = Math.hypot(atom.x - cursorX, atom.y - cursorY);
+                if (dist < 100) {
+                    const angle = Math.atan2(atom.y - cursorY, atom.x - cursorX);
+                    atom.dx = Math.cos(angle);
+                    atom.dy = Math.sin(angle);
+                }
+            });
+        }
+
+        setInterval(moveAtoms, 50);
+        container.addEventListener('mousemove', avoidCursor);
+
+        const footerText = document.getElementById('footer-text');
+        const currentYear = new Date().getFullYear();
+        footerText.textContent = `Copyrights: (Born)1987-${currentYear}`;
+
+        async function fetchVisitorInfo() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                document.getElementById('visitor-ip').textContent = `IP: ${data.ip}`;
+                document.getElementById('visitor-location').textContent = `Location: ${data.city}, ${data.region}, ${data.country_name}`;
+                fetchWeather(data.latitude, data.longitude, 'visitor-weather');
+                updateLocalTime(data.utc_offset);
+            } catch (error) {
+                console.error('Error fetching visitor info:', error);
+            }
+        }
+
+        async function fetchWeather(lat, lon, elementId) {
+            try {
+                const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY'; // Replace with your OpenWeatherMap API key
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`);
+                const data = await response.json();
+                const temperature = data.main.temp;
+                document.getElementById(elementId).textContent = `Weather: ${temperature}°C`;
+            } catch (error) {
+                console.error('Error fetching weather:', error);
+            }
+        }
+
+        function updateLocalTime(offset) {
+            const localTimeElement = document.getElementById('local-time');
+            const offsetMinutes = parseInt(offset) * 60;
+            const localTime = new Date(new Date().getTime() + offsetMinutes * 60000);
+            localTimeElement.textContent = `Local Time: ${localTime.toLocaleTimeString()}`;
+        }
+
+        async function fetchMunichWeather() {
+            try {
+                const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY'; // Replace with your OpenWeatherMap API key
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Munich&units=metric&appid=${apiKey}`);
+                const data = await response.json();
+                const temperature = data.main.temp;
+                document.getElementById('munich-weather').textContent = `Munich Weather: ${temperature}°C`;
+            } catch (error) {
+                console.error('Error fetching Munich weather:', error);
+            }
+        }
+
+        function updateUTCTime() {
+            const utcTimeElement = document.getElementById('utc-time');
+            const utcTime = new Date(new Date().getTime() + 60 * 60 * 1000);
+            utcTimeElement.textContent = `UTC+1 Time: ${utcTime.toLocaleTimeString()}`;
+        }
+
+        fetchVisitorInfo();
+        fetchMunichWeather();
+        updateUTCTime();
+        setInterval(updateUTCTime, 60000); // Update every minute
+
+        function showPopup(section) {
+            const popup = document.getElementById(`popup-${section}`);
+            popup.classList.add('show');
+        }
+
+        function hidePopup(section) {
+            const popup = document.getElementById(`popup-${section}`);
+            popup.classList.remove('show');
+        }
+
+        document.getElementById('popup-left').addEventListener('click', () => hidePopup('left'));
+        document.getElementById('popup-right').addEventListener('click', () => hidePopup('right'));
+    </script>
+</body>
+</html>
+
