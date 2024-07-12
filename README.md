@@ -1,99 +1,128 @@
-Personal Landing Page
-This project is a personal landing page with interactive features, including dynamically updating weather, local time, visitor IP information, and pop-up windows with social media links. The page is split into two main sections, each displaying different information and actions on click.
+<h1>Personal Landing Page</h1>
 
-Features
-Interactive Background: Dynamic atoms and code snippets that move around the screen.
-Header and Footer: Header with a welcome message and footer displaying local time, weather, visitor IP and location, and current year.
-Pop-up Windows: Social media links displayed in pop-up windows when clicking on each section.
-Dynamic Updates: Weather and time updates using APIs.
-Sections Explanation
-1. Header
-The header contains a welcome message with a custom font:
+<p>This project is a personal landing page with interactive features, including dynamically updating weather, local time, visitor IP information, and pop-up windows with social media links. The page is split into two main sections, each displaying different information and actions on click.</p>
 
-Uses the Alex Brush font from Google Fonts.
-Stays fixed at the top of the page.
-2. Footer
-The footer displays:
+<h2>Features</h2>
+<ul>
+    <li><strong>Interactive Background</strong>: Dynamic atoms and code snippets that move around the screen.</li>
+    <li><strong>Header and Footer</strong>: Header with a welcome message and footer displaying local time, weather, visitor IP and location, and current year.</li>
+    <li><strong>Pop-up Windows</strong>: Social media links displayed in pop-up windows when clicking on each section.</li>
+    <li><strong>Dynamic Updates</strong>: Weather and time updates using APIs.</li>
+</ul>
 
-Local time in the visitor's time zone.
-Weather in Munich.
-Visitor's IP address and location.
-Current year.
-3. Left Section (FOR THE RECORD)
-Displays a background image.
-Shows the title "FOR THE RECORD".
-On click, shows a pop-up window with social media links.
-4. Right Section (MY RESEARCHES AND PUBLISHING PAPERS)
-Displays a background image.
-Shows the title "MY RESEARCHES AND PUBLISHING PAPERS".
-On click, shows a pop-up window with social media links.
-5. Background
-Dynamic atoms and code snippets move around the screen.
-Atoms avoid the cursor.
-Setup Tutorial
-Prerequisites
-Web server to host the HTML file.
-API key from OpenWeatherMap.
-Steps
-Clone the Repository
+<h2>Sections Explanation</h2>
 
-sh
-Copy code
-git clone https://github.com/yourusername/personal-landing-page.git
-cd personal-landing-page
-Update Image Paths
+<h3>1. Header</h3>
+<p>The header contains a welcome message with a custom font:</p>
+<ul>
+    <li>Uses the <code>Alex Brush</code> font from Google Fonts.</li>
+    <li>Stays fixed at the top of the page.</li>
+</ul>
 
-Ensure your background images are named image1.webp and image2.webp, or update the paths in the HTML:
+<h3>2. Footer</h3>
+<p>The footer displays:</p>
+<ul>
+    <li>Local time in the visitor's time zone.</li>
+    <li>Weather in Munich.</li>
+    <li>Visitor's IP address and location.</li>
+    <li>Current year.</li>
+</ul>
 
-html
-Copy code
-<div class="left" onclick="showPopup('left')" style="background-image: url('path/to/your/image1.webp');">
-<div class="right" onclick="showPopup('right')" style="background-image: url('path/to/your/image2.webp');">
-Add Social Media Icons
+<h3>3. Left Section (FOR THE RECORD)</h3>
+<ul>
+    <li>Displays a background image.</li>
+    <li>Shows the title "FOR THE RECORD".</li>
+    <li>On click, shows a pop-up window with social media links.</li>
+</ul>
 
-Ensure your social media icons are in the project directory or update the paths in the HTML:
+<h3>4. Right Section (MY RESEARCHES AND PUBLISHING PAPERS)</h3>
+<ul>
+    <li>Displays a background image.</li>
+    <li>Shows the title "MY RESEARCHES AND PUBLISHING PAPERS".</li>
+    <li>On click, shows a pop-up window with social media links.</li>
+</ul>
 
-html
-Copy code
-<a href="#"><img src="path/to/your/facebook-icon.png" alt="Facebook">Facebook</a>
-Update OpenWeatherMap API Key
+<h3>5. Background</h3>
+<ul>
+    <li>Dynamic atoms and code snippets move around the screen.</li>
+    <li>Atoms avoid the cursor.</li>
+</ul>
 
-Replace YOUR_OPENWEATHERMAP_API_KEY with your actual API key in the script:
+<h2>Setup Tutorial</h2>
 
-javascript
-Copy code
-const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
-Test the Page
+<h3>Prerequisites</h3>
+<ul>
+    <li>Web server to host the HTML file.</li>
+    <li>API key from <a href="https://home.openweathermap.org/users/sign_up">OpenWeatherMap</a>.</li>
+</ul>
 
-Open the index.html file in your browser or deploy it on a web server to see the changes.
+<h3>Steps</h3>
+<ol>
+    <li><strong>Clone the Repository</strong>
+        <pre>
+<code>git clone https://github.com/yourusername/personal-landing-page.git
+cd personal-landing-page</code>
+        </pre>
+    </li>
 
-Customization
-Change Background Images
+    <li><strong>Update Image Paths</strong>
+        <p>Ensure your background images are named <code>image1.webp</code> and <code>image2.webp</code>, or update the paths in the HTML:</p>
+        <pre>
+<code>&lt;div class=&quot;left&quot; onclick=&quot;showPopup('left')&quot; style=&quot;background-image: url('path/to/your/image1.webp');&quot;&gt;
+&lt;div class=&quot;right&quot; onclick=&quot;showPopup('right')&quot; style=&quot;background-image: url('path/to/your/image2.webp');&quot;&gt;</code>
+        </pre>
+    </li>
 
-Replace image1.webp and image2.webp with your preferred images.
+    <li><strong>Add Social Media Icons</strong>
+        <p>Ensure your social media icons are in the project directory or update the paths in the HTML:</p>
+        <pre>
+<code>&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;path/to/your/facebook-icon.png&quot; alt=&quot;Facebook&quot;&gt;Facebook&lt;/a&gt;</code>
+        </pre>
+    </li>
 
-Update Social Media Links
+    <li><strong>Update OpenWeatherMap API Key</strong>
+        <p>Replace <code>YOUR_OPENWEATHERMAP_API_KEY</code> with your actual API key in the script:</p>
+        <pre>
+<code>const apiKey = 'YOUR_OPENWEATHERMAP_API_KEY';</code>
+        </pre>
+    </li>
 
-Replace the href attributes in the social media links with your actual profile URLs:
+    <li><strong>Test the Page</strong>
+        <p>Open the <code>index.html</code> file in your browser or deploy it on a web server to see the changes.</p>
+    </li>
+</ol>
 
-html
-Copy code
-<a href="https://facebook.com/yourprofile"><img src="facebook-icon.png" alt="Facebook">Facebook</a>
-Modify Fonts and Styles
+<h2>Customization</h2>
 
-Update the font and style sections in the <head> of the HTML to change the appearance:
+<ol>
+    <li><strong>Change Background Images</strong>
+        <p>Replace <code>image1.webp</code> and <code>image2.webp</code> with your preferred images.</p>
+    </li>
 
-html
-Copy code
-<link href="https://fonts.googleapis.com/css2?family=YourFontChoice&display=swap" rel="stylesheet">
-<style>
+    <li><strong>Update Social Media Links</strong>
+        <p>Replace the <code>href</code> attributes in the social media links with your actual profile URLs:</p>
+        <pre>
+<code>&lt;a href=&quot;https://facebook.com/yourprofile&quot;&gt;&lt;img src=&quot;facebook-icon.png&quot; alt=&quot;Facebook&quot;&gt;Facebook&lt;/a&gt;</code>
+        </pre>
+    </li>
+
+    <li><strong>Modify Fonts and Styles</strong>
+        <p>Update the font and style sections in the <code>&lt;head&gt;</code> of the HTML to change the appearance:</p>
+        <pre>
+<code>&lt;link href=&quot;https://fonts.googleapis.com/css2?family=YourFontChoice&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;style&gt;
   .your-style {
     font-family: 'YourFontChoice', sans-serif;
   }
-</style>
-Adjust JavaScript for More Custom Features
+&lt;/style&gt;</code>
+        </pre>
+    </li>
 
-Modify the JavaScript functions to add more interactive features or change existing behaviors.
+    <li><strong>Adjust JavaScript for More Custom Features</strong>
+        <p>Modify the JavaScript functions to add more interactive features or change existing behaviors.</p>
+    </li>
+</ol>
 
-License
-This project is free to use for any reason. Feel free to modify, distribute, or incorporate it into your own projects.
+<h2>License</h2>
+
+<p>This project is free to use for any reason. Feel free to modify, distribute, or incorporate it into your own projects.</p>
